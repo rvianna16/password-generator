@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { NotificationService } from '../notification.service';
+
 @Component({
   selector: 'pw-generator',
   templateUrl: './pw-generator.component.html',
@@ -7,13 +9,22 @@ import { Component } from '@angular/core';
 })
 export class PwGeneratorComponent {
   length: number = 1;
-  includeUppercaseLetters: boolean = true;
+  includeUppercaseLetters: boolean = false;
   includeLowercaseLetters: boolean = false;
   includeNumbers: boolean = false;
   includeSymbols: boolean = false;
   password: string = '';
 
-  constructor() {}
+  constructor(private notifyService: NotificationService) {}
+
+  showToasterSuccess() {
+    if (this.password) {
+      this.notifyService.showSuccess(
+        'Password copied successfully !!',
+        'Password Generator'
+      );
+    }
+  }
 
   generatePassword() {
     const upperLetters = 'ABCDEFGHIJKLMNOPQRSTUVWYXZ';
@@ -44,7 +55,7 @@ export class PwGeneratorComponent {
       const index = Math.floor(Math.random() * validChars.length);
       generatedPassword += validChars[index];
     }
-   
+
     this.password = generatedPassword;
   }
 

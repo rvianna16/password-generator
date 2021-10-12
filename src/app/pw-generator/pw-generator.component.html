@@ -3,7 +3,11 @@
 
   <div class="pw-input">
     <input type="text" readonly [value]="password">
-    <div class="pw-copy" ngxClipboard [cbContent]="password">
+    <div 
+    class="pw-copy" 
+    ngxClipboard 
+    [cbContent]="password" 
+    (click)="showToasterSuccess()">
       <img src="../../assets/copy.png" alt="Copy">
     </div>
   </div>
@@ -25,7 +29,7 @@
 
   <div class="pw-check">
     <label>Use Uppercase Letters</label>
-    <input (change)="onChangeUpperLetters()" checked type="checkbox">
+    <input (change)="onChangeUpperLetters()" type="checkbox">
   </div>
 
   <div class="pw-check">
