@@ -1,0 +1,51 @@
+<div class="pw-container">
+  <h1 class="pw-title">Password Generator</h1>
+
+  <div class="pw-input">
+    <input type="text" readonly [value]="password">
+    <div class="pw-copy" ngxClipboard [cbContent]="password">
+      <img src="../../assets/copy.png" alt="Copy">
+    </div>
+  </div>
+
+  <div class="pw-length">
+    <h2>Length</h2>
+    <div class="pw-length-container">
+      <input 
+      class="pw-length--range" 
+      type="range" 
+      min="1" 
+      max="100" 
+      [ngModel]="length"        
+      (ngModelChange)="length = $event"
+      >
+      <span>{{ length }}</span>
+    </div>
+  </div>
+
+  <div class="pw-check">
+    <label>Use Uppercase Letters</label>
+    <input (change)="onChangeUpperLetters()" checked type="checkbox">
+  </div>
+
+  <div class="pw-check">
+    <label>Use Lowercase Letters</label>
+    <input (change)="onChangeLowerLetters()" type="checkbox">
+  </div>
+
+  <div class="pw-check">
+    <label>Use Numbers</label>
+    <input (change)="onChangeNumbers()" type="checkbox">
+  </div>
+
+  <div class="pw-check">
+    <label>Use Symbols</label>
+    <input (change)="onChangeSymbols()" type="checkbox">
+  </div>
+
+  <button 
+    [disabled]="!(includeUppercaseLetters || includeLowercaseLetters || includeNumbers || includeSymbols)" 
+    class="pw-generate" 
+    (click)="generatePassword()">Generate
+  </button>
+</div>
